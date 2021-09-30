@@ -19,12 +19,13 @@ namespace UserMaintenance
         {
             InitializeComponent();
             label1.Text = Resource1.LastName;
-            label2.Text = Resource1.FirstName; 
             button1.Text = Resource1.Add;
+            button2.Text = Resource1.ButtonText;
 
             listUsers.DataSource = users;
             listUsers.ValueMember = "ID";
             listUsers.DisplayMember = "FullName";
+
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -35,6 +36,11 @@ namespace UserMaintenance
                 
             };
             users.Add(u);
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog sfd = new SaveFileDialog();
         }
     }
 }
