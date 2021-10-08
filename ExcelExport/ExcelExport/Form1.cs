@@ -136,6 +136,10 @@ namespace ExcelExport
             headerRange.RowHeight = 40;
             headerRange.Interior.Color = Color.LightBlue;
             headerRange.BorderAround2(Excel.XlLineStyle.xlContinuous, Excel.XlBorderWeight.xlThick);
+
+            int lastrowid = xlSheet.UsedRange.Rows.Count;
+            Excel.Range completetable = xlSheet.get_Range(GetCell(1, 1), GetCell(1, headers.Length));
+            completetable.BorderAround2(Excel.XlLineStyle.xlContinuous, Excel.XlBorderWeight.xlThick);
         }
     }
 }
