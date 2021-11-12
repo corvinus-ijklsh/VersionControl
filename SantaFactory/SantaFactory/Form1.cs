@@ -1,4 +1,5 @@
-﻿using SantaFactory.Entities;
+﻿using SantaFactory.Abstractions;
+using SantaFactory.Entities;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,38 +14,38 @@ namespace SantaFactory
 {
     public partial class Form1 : Form
     {
-        List<Ball> _balls = new List<Ball>();
+        List<Toy> _toys = new List<Toy>();
 
-        private BallFactory ballFactory;
+        private IToyFactory _toyFactory;
 
-        public BallFactory BallFactory
+        public IToyFactory ToyFactory
         {
-            get { return ballFactory; }
-            set { ballFactory = value; }
+            get { return _toyFactory; }
+            set { _toyFactory = value; }
         }
 
         public Form1()
         {
             InitializeComponent();
-            BallFactory = new BallFactory();
+            ToyFactory = new CarFactory();
             
         }
 
         private void createTimer_Tick(object sender, EventArgs e)
         {
-            var ball = BallFactory.CreateNew();
-            _balls.Add(ball);
-            mainPanel.Controls.Add(ball);
-            ball.Left = -ball.Width;
+            var toy = ToyFactory.CreateNew();
+            _toys.Add(toy);
+            mainPanel.Controls.Add(toy);
+            toy.Left = -toy.Width;
         }
 
         private void conveyorTimer_Tick(object sender, EventArgs e)
         {
             var lastPosition = 0;
 
-            foreach (var item in _balls)
+            foreach (var item in _toys)
             {
-                item.MoveBall();
+                item.MoveToy();
                 if (item.Left > lastPosition)
                 {
                     lastPosition = item.Left;
@@ -52,8 +53,9 @@ namespace SantaFactory
             }
             if (lastPosition>= 1000)
             {
-                var oldestBall = _balls[0];
-                _balls.Remove(oldestBall);
+                var oldestToy = _toys[0];
+                _toys.Remove(oldestToy);
+                mainPanel.Controls.Remove(oldestToy);
             }
         }
     }
