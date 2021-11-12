@@ -101,5 +101,14 @@ namespace SantaFactory
             if (cd.ShowDialog() != DialogResult.OK) return;
             button.BackColor = cd.Color;
         }
+
+        private void btnPresent_Click(object sender, EventArgs e)
+        {
+            ToyFactory = new PresentFactory()
+            {
+                BoxColor = btnColorBox.BackColor,
+                RibbonColor = btnColorRibbon.BackColor
+            };
+        }
     }
 }
