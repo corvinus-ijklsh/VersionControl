@@ -15,5 +15,9 @@ namespace SantaFactory.Entities
             var image = Image.FromFile(@"Images\car.png");
             g.DrawImage(image, 0, 0,Width,Height);
         }
+        public override void MoveToy()
+        {
+            Left += 2;
+        }
     }
 }

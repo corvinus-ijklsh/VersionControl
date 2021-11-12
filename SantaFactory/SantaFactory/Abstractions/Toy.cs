@@ -26,7 +26,7 @@ namespace SantaFactory.Abstractions
 
         protected abstract void Drawimage(Graphics g);
         
-        public void MoveToy()
+        public virtual void MoveToy()
         {
             Left++;
         }
