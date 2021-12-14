@@ -25,10 +25,15 @@ namespace MicroSimExample
         {
             InitializeComponent();
 
-            Population = GetPopulation(@"C:\temp\nép-teszt.csv");
+
             BirthProbabilities = GetBirthProbabilities(@"C:\temp\születés.csv");
             DeathProbabilities = GetDeathProbabilities(@"C:\temp\halál.csv");
 
+        }
+
+        private void StartSimulation(int endYear, string csvPath)
+        {
+            Population = GetPopulation(@"C:\temp\nép-teszt.csv");
             for (int year = 2005; year < 2024; year++)
             {
                 for (int i = 0; i < Population.Count; i++)
@@ -41,8 +46,8 @@ namespace MicroSimExample
                                   select x).Count();
 
                 int nbrOfFemales = (from x in Population
-                                  where x.Gender == Gender.Female && x.IsAlive
-                                  select x).Count();
+                                    where x.Gender == Gender.Female && x.IsAlive
+                                    select x).Count();
 
                 Console.WriteLine(string.Format(
 
@@ -54,6 +59,7 @@ namespace MicroSimExample
 
             }
         }
+
         private void SimStep(int year, Person person)
         {
             //Ha halott akkor kihagyjuk, ugrunk a ciklus következő lépésére
@@ -156,6 +162,12 @@ namespace MicroSimExample
             }
 
             return deathProbabilities;
+        }
+
+        private void btnStart_Click(object sender, EventArgs e)
+        {
+            StartSimulation((int)nudYear.Value,txtPath.Text);
+
         }
     }
 }
