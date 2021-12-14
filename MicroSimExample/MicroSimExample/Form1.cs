@@ -33,7 +33,7 @@ namespace MicroSimExample
             {
                 for (int i = 0; i < Population.Count; i++)
                 {
-
+                    SimStep(year, Population[i]);
                 }
 
                 int nbrOfMales = (from x in Population
@@ -122,7 +122,7 @@ namespace MicroSimExample
                     var line = sr.ReadLine().Split(';');
                     birthProbabilities.Add(new BirthProbability()
                     {
-                        Age = int.Parse(line[0]),
+                        Age = byte.Parse(line[0]),
                         NbrOfChildren = int.Parse(line[1]),
                         P = double.Parse(line[2].Replace(",","."))
          
@@ -146,7 +146,7 @@ namespace MicroSimExample
                     deathProbabilities.Add(new DeathProbability()
                     {
                         Gender = (Gender)Enum.Parse(typeof(Gender), line[0]),
-                        Age = int.Parse(line[1]),
+                        Age = byte.Parse(line[1]),
                         P = double.Parse(line[2].Replace(",","."))
                     
                     });
