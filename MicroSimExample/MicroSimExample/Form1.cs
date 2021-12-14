@@ -24,6 +24,7 @@ namespace MicroSimExample
             InitializeComponent();
 
             Population = GetPopulation(@"C:\temp\nép-teszt.csv");
+            BirthProbabilities = GetBirthProbabilities(@"C:\temp\születés.csv");
         }
 
         public List<Person> GetPopulation(string csvPath)
@@ -46,6 +47,29 @@ namespace MicroSimExample
             }
 
             return population;
+        }
+
+        public List<BirthProbability> GetBirthProbabilities(string csvPath)
+        {
+            List<BirthProbability> birthProbabilities = new List<BirthProbability>();
+            using (var sr = new StreamReader(csvPath, Encoding.Default))
+            {
+                while (!sr.EndOfStream)
+                {
+                    var line = sr.ReadLine().Split(';');
+                    birthProbabilities.Add(new BirthProbability()
+                    {
+                        Age = int.Parse(line[0]),
+                        P = double.Parse(line[2]),
+                        NbrOfChildren = int.Parse(line[1])
+                        
+                    });
+
+
+                }
+            }
+
+            return birthProbabilities;
         }
     }
 }
