@@ -49,9 +49,9 @@ namespace MicroSimExample
                                     where x.Gender == Gender.Female && x.IsAlive
                                     select x).Count();
 
-                Console.WriteLine(string.Format(
+                txtMain.Text +=(string.Format(
 
-                    "Év: {0}\nFérfiak: {1}\nNők: {2}\n",
+                    "Szimulációs év: {0}\n\tFérfiak: {1}\n\tNők: {2}\n\n",
                     year,
                     nbrOfMales,
                     nbrOfFemales
@@ -168,6 +168,16 @@ namespace MicroSimExample
         {
             StartSimulation((int)nudYear.Value,txtPath.Text);
 
+        }
+
+        private void btnBrowse_Click(object sender, EventArgs e)
+        {
+            var ofd = new OpenFileDialog();
+            ofd.FileName = txtPath.Text;
+            if (ofd.ShowDialog() != DialogResult.OK) return;
+
+            txtPath.Text = ofd.FileName;
+            
         }
     }
 }
